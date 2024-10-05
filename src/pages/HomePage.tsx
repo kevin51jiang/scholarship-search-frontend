@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'wouter';
+import { Button } from "@/components/ui/button"
 
 const HomePage: React.FC = () => {
   return (
@@ -11,6 +12,15 @@ const HomePage: React.FC = () => {
           View All Scholarships
         </a>
       </Link>
+  <Button 
+  variant="outline" 
+  onClick={() => {
+    window.location.href = "/test";
+  }}
+>
+  Button
+</Button>
+
     </div>
   );
 };
