@@ -1,0 +1,18 @@
+{
+    "name": "scholarshipAutoFiller",
+    "description": "This extension will automatically fill the scholarship form",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background": {
+        "service_worker": "welcome/background.js"
+    },
+    "action": {
+        "default_popup": "index.html"
+    },
+    "content_scripts": [
+        {
+          "matches": ["<all_urls>"],
+          "js": ["content.js"]
+        }
+      ]
+}
