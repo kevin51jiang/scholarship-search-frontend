@@ -1,35 +1,27 @@
 import React from 'react';
-import { useLocation } from 'wouter';
+import { Link, useLocation } from 'wouter';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 
 const scholarships = [
   {
-    name: "Scholarship Name ($value)",
-    description: "Short description of the scholarship.",
-    requirements: "List of peculiar/specific requirements.",
-    deadline: "Jul 20, 2025",
+    id: "1",
+    name: "STEM Excellence Scholarship",
+    description: "For outstanding students in Science, Technology, Engineering, or Mathematics.",
+    deadline: "December 31, 2024",
+    amount: "$5000",
   },
   {
-    name: "Scholarship Name ($1000-$6000)",
-    description: "Short description of the scholarship.",
-    requirements: "List of peculiar/specific requirements.",
-    deadline: "Jul 20, 2025",
+    id: "2",
+    name: "Arts and Humanities Grant",
+    description: "Supporting creative minds in various artistic and humanistic disciplines.",
+    deadline: "November 15, 2024",
+    amount: "$3500",
   },
-  {
-    name: "Scholarship Name ($100)",
-    description: "Short description of the scholarship.",
-    requirements: "List of peculiar/specific requirements.",
-    deadline: "Jul 20, 2025",
-  },
+  // Add more scholarships as needed
 ];
 
-
-interface Scholarship {
-  id: string
-  name: string;
-  overallDesc: string;
-  requirementsDesc: string;
-  deadline: Date;
-}
 
 const ResultsPage: React.FC = () => {
   const [location] = useLocation();
@@ -40,35 +32,44 @@ const ResultsPage: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4">Scholarship Results</h1>
       <p className="mb-4">Showing results for: {query}</p>
       
-      <div className="flex flex-col space-y-2">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {scholarships.map((scholarship, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg p-4">
-        <ScholarshipCard  scholarship={scholarship} />
-        </div>
+          <Card key={index}>
+            <CardHeader>
+              <CardTitle>{scholarship.name}</CardTitle>
+              <CardDescription>{scholarship.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-500">{scholarship.requirements}</p>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+              <p className="text-sm text-gray-400">Deadline: {scholarship.deadline}</p>
+              <Button variant="outline" asChild>
+                  <Link href={`/scholarships/${scholarship.id}`}>
+                    View Details
+                  </Link>
+                </Button>
+            </CardFooter>
+          </Card>
         ))}
       </div>
 
-        {/* {scholarships.map((scholarship, index) => (
-          <div key={index} className="bg-white shadow-md rounded-lg p-4">
-            <h2 className="text-xl font-semibold">{scholarship.name}</h2>
-            <p className="text-gray-600">{scholarship.description}</p>
-            <p className="mt-2 text-gray-500">{scholarship.requirements}</p>
-            <p className="mt-4 border-t pt-2 text-gray-400 text-sm">
-              Deadline: {scholarship.deadline}
-            </p>
-            <button className="mt-4 text-blue-500 hover:underline">
-              View More
-            </button>
-          </div>
-        ))} */}
-      </div>
-
-      {/* Pagination */}
-      <div className="mt-8 flex justify-center">
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-l">Previous</button>
-        <span className="px-4 py-2">1</span>
-        <button className="bg-blue-500 text-white px-4 py-2 rounded-r">Next</button>
-      </div>
+      <Pagination className="mt-8">
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink href="#">1</PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext href="#" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };

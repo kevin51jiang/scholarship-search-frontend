@@ -7,20 +7,18 @@ const HomePage: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-4">Welcome to Our Scholarship Search</h1>
       <p className="mb-4">Find the perfect scholarship opportunities for your academic journey.</p>
-      <Link href="/results?q=all">
-        <a className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          View All Scholarships
-        </a>
-      </Link>
-  <Button 
-  variant="outline" 
-  onClick={() => {
-    window.location.href = "/test";
-  }}
->
-  Button
-</Button>
-
+      <div className="space-x-4">
+        <Button asChild>
+          <Link href="/results?q=all">
+            View All Scholarships
+          </Link>
+        </Button>
+        <Button variant="outline" asChild>
+          <Link href="/test">
+            Apply for Scholarship
+          </Link>
+        </Button>
+      </div>
     </div>
   );
 };
